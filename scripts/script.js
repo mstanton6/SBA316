@@ -7,7 +7,7 @@ const msgbtn = document.getElementById('message');
 // console.log('submitbtn ' + submitbtn.name);
 
 // Get a random number
-let answer = Math.round(Math.random() * 100)
+let answer = Math.round(Math.random() * 100) + 1;
 console.log('answer ' + answer);
 
 // Event Handelers
@@ -18,16 +18,26 @@ exitbtn.addEventListener('click', exit);
 
 function submitit(event) {
     event.preventDefault();
+    
+    // cache the guess into hisitory
+    let history = document.getElementById('historyguess'); // ('guessForm');
+    let li = document.createElement("li");
+    li.textContent = guess.value;
+    // Use appendChild and/or prepend to add new elements to the DOM.
+    history.prepend(li);
 
     // *** Use the parent-child-sibling relationship to navigate between elements at least once 
     let theparentnode = submitbtn.parentNode;
     console.log('The submit button parent is: ', theparentnode);
-
-    // ** Iterate over a collection of elements to accomplish some task. (turn all the buttons color to blue)
+    
+    // get the buttons and the colors for them
     const buttons = document.getElementsByTagName('button');
+    colorarr = ['red','green','blue','purple','yellow','orange','lightblue','cyan','magenta','aqua'];
+    newcolor = Math.round(Math.random() * 10) + 1; // get a random number between 1-10
 
+    // ** Iterate over a collection of elements to accomplish some task. (turn all the buttons color to a randowm color)
     for (const button of buttons) {
-        button.style.color = 'blue';  // turn all the buttons color to blue on submit
+      button.style.color = colorarr[newcolor];  // turn all the buttons color to a randowm color on submit
     }
 
     // This is the game logic
@@ -46,10 +56,22 @@ function submitit(event) {
 }
 
 function startnew() {
-    // console.log('Got to the start new function');
+
+    // Clear the messages
+    message.textContent = "";
+    historyguess.textContent = "";
+
     // Get a new random number number every time "Start New Game" is clicked.
-    answer = Math.round(Math.random() * 100);
+    answer = Math.round(Math.random() * 100) + 1;
     console.log('answer ' + answer);
+
+    // Create at least one element using createElement.
+    let container = document.getElementById('guessForm')
+    newbutton = document.createElement('button');
+    newbutton.style.width = '50px';
+    newbutton.style.height = '30px';
+    container.appendChild(newbutton);
+
     return;
 }
 
