@@ -32,39 +32,48 @@ catch (err) {
 }
 
 function changeit(event) {
-   /** This is the event handler function for the changebtn button.
-    *  The changebtn button is for "Change Submit Button"
-    *  This function 1. Changes the text of the Submit button to what the user wants
-    */
+    /** This is the event handler function for the changebtn button.
+     *  The changebtn button is for "Change Submit Button"
+     *  This function 1. Changes the text of the Submit button to what the user wants
+     *  2. Modify the style and/or CSS classes of an element in response to user interactions using the style or classList properties.
+     */
+
+    if (changeinput.value === '') {  // Prevent the user from entering an empty string
+        msgbtn.textContent = "Enter Text for the Submit Button";
+        return;
+    } else {msgbtn.textContent = "" // clear out the message
+
+    }
     // 10. Requirement - Modify at least one attribute of an element in response to user interaction.
     // This is changing the text of the submit button to whatever the user wants
     let changevalue = changeinput.value;
     submitbtn.value = changevalue;
     changeinput.value = "";
+
+    // 9. Requirement - Modify the style and/or CSS classes of an element in response to user interactions using the style or classList properties.
+    overviewbtn.style.fontSize = '20px';
 }
 
 function submitit(event) {
     /**This is the event handler function for the submitbtn button.
     *  The submitbtn button is for "Submit"
-    *  This function 1. Prevent the user from entering an empty string 2. Modify the HTML or text content of at least one element
+    *  This function 1. Prevent the user from entering an empty string 2. Modify the HTML or text content of at least one element and Use at least two Browser Object Model (BOM) properties or methods
     *  3. Use the parent-child-sibling relationship to navigate between elements at least once
     *  4. The color of the buttons will change randomly upon the submit button being clicked and Iterate over a collection of elements to accomplish some task.
     *  5. The game logic 6. cache the guess into hisitory
     */
     event.preventDefault();
-    
+
     // Requirement 14 - Include at least one form and/or input with DOM event-based validation.
     // (This can be the same form or input as the one above, but should include event-based validation in addition to the HTML attribute validation.)
     if (guess.value === '') {  // Prevent the user from entering an empty string
-       msgbtn.textContent = "Submit a number 1-100";
-       return;
+        msgbtn.textContent = "Submit a number 1-100";
+        return;
     }
 
     // 8. Requirement - Modify the HTML or text content of at least one element in response to user interaction using innerHTML, innerText, or textContent.
-    overviewbtn.textContent = "This text has now been changed to show you window width and height: " + window.innerWidth + " X " + window.innerHeight;
     // Requirement 12b: Use at least two Browser Object Model (BOM) properties or methods
-  //  console.log('window inner width ' + window.innerWidth);
-  //  console.log('window inner height ' + window.innerHeight);
+    overviewbtn.textContent = "This text has now been changed to show you window width and height: " + window.innerWidth + " X " + window.innerHeight;
 
     // 3. Requirement Use the parent-child-sibling relationship to navigate between elements at least once 
     let theparentnode = submitbtn.parentNode;
