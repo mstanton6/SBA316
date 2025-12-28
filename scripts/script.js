@@ -1,4 +1,3 @@
-
 // 1. Requirement Cache at least one element using selectElementById.
 const guess = document.getElementById('guess');
 // 2. Requirement Cache at least one element using querySelector
@@ -33,13 +32,25 @@ catch (err) {
 }
 
 function changeit(event) {
+   /** This is the event handler function for the changebtn button.
+    * The changebtn button is for "Change Submit Button"
+    *  This function 1. Changes the text of the Submit button to what the user wants
+    */
     // 10. Requirement - Modify at least one attribute of an element in response to user interaction.
+    // This is changing the text of the submit button to whatever the user wants
     let changevalue = changeinput.value;
     submitbtn.value = changevalue;
     changeinput.value = "";
 }
 
 function submitit(event) {
+    /**This is the event handler function for the submitbtn button.
+    *  The submitbtn button is for "Submit"
+    *  This function 1. Prevent the user from entering an empty string 2. Modify the HTML or text content of at least one element
+    *  3. Use the parent-child-sibling relationship to navigate between elements at least once
+    *  4. The color of the buttons will change randomly upon the submit button being clicked and Iterate over a collection of elements to accomplish some task.
+    *  5. The game logic 6. cache the guess into hisitory
+    */
     event.preventDefault();
 
     // Requirement 14 - Include at least one form and/or input with DOM event-based validation.
@@ -56,7 +67,7 @@ function submitit(event) {
     let theparentnode = submitbtn.parentNode;
     // console.log('The submit button parent is: ', theparentnode);
 
-    // get the buttons and the colors for them
+    // get the buttons and the colors for them - the color of the buttons will change randomly upon the submit button being clicked
     const buttons = document.getElementsByTagName('button');
     const colorarr = ['red', 'green', 'blue', 'purple', 'DarkGray', 'orange', 'MidnightBlue', 'Gunmetal', 'magenta', 'Navy'];
     let newcolor = Math.floor(Math.random() * colorarr.length); // get a random number between 1-10
@@ -90,7 +101,11 @@ function submitit(event) {
 }
 
 function startnew() {
-
+    /** This is the event handler function for the startnewbtn button.
+     * The startnewbtn button is for "Start New Game"
+    *  This function 1. Clears the messages 2. Gets a new random number
+    *  3. Creates a new button on the fly
+    */
     // Clear the messages
     msgbtn.textContent = "";
     history.textContent = "";
@@ -102,6 +117,7 @@ function startnew() {
     answer = Math.floor(Math.random() * 100) + 1;
     //console.log('answer ' + answer);
 
+    // Creates a new button on the fly
     let container = document.getElementById('guessForm')
     // 5. Requirement - Create at least one element using createElement.
     let newbutton = document.createElement('button');
@@ -113,6 +129,10 @@ function startnew() {
 }
 
 function exit() {
+    /** This is the event handler function for the exitbtn button.
+     * The exitbtn button is for "Exit Game"
+     */
+    // Requirement 12a: Use at least two Browser Object Model (BOM) properties or methods.
     window.close();
     return;
 }
