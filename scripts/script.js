@@ -1,3 +1,4 @@
+
 // 1. Requirement Cache at least one element using selectElementById.
 const guess = document.getElementById('guess');
 // 2. Requirement Cache at least one element using querySelector
@@ -11,19 +12,25 @@ const history = document.getElementById('historyguess'); // ('guessForm');
 const overviewbtn = document.getElementById('overview');
 // const formbtn = document.getElementById('guessForm');
 
- overviewbtn.textContent = `A number guessing game is a simple challenge where a player tries to guess a secret number chosen by the computer or another player within a limited number of attempts, receiving "too high" or "too low" hints after each incorrect guess to narrow down the possibilities and find the answer efficiently.`;
-
 // Get a random number
 let answer = Math.floor(Math.random() * 100) + 1;
 // console.log('answer ' + answer);
 
-// Event listeners
-// 11. Requirement - Register at least two different event listeners and create the associated event handler functions.
-//guessbtn.addEventListener('click', guessit);
-submitbtn.addEventListener('click', submitit);
-startnewbtn.addEventListener('click', startnew);
-exitbtn.addEventListener('click', exit);
-changebtn.addEventListener('click', changeit);
+try {
+    overviewbtn.textContent = `A number guessing game is a simple challenge where a player tries to guess a secret number chosen by the computer or another player within a limited number of attempts, receiving "too high" or "too low" hints after each incorrect guess to narrow down the possibilities and find the answer efficiently.`;
+
+    // Event listeners
+    // 11. Requirement - Register at least two different event listeners and create the associated event handler functions.
+    //guessbtn.addEventListener('click', guessit);
+    submitbtn.addEventListener('click', submitit);
+    startnewbtn.addEventListener('click', startnew);
+    exitbtn.addEventListener('click', exit);
+    changebtn.addEventListener('click', changeit);
+}
+catch (err) {
+    console.error(err);
+
+}
 
 function changeit(event) {
     // 10. Requirement - Modify at least one attribute of an element in response to user interaction.
@@ -35,14 +42,15 @@ function changeit(event) {
 function submitit(event) {
     event.preventDefault();
 
-    // 8. Requirement - Modify the HTML or text content of at least one element in response to user interaction using innerHTML, innerText, or textContent.
-     overviewbtn.textContent = "This text has now been changed."
+    // Requirement 14 - Include at least one form and/or input with DOM event-based validation.
+    // (This can be the same form or input as the one above, but should include event-based validation in addition to the HTML attribute validation.)
+    if (guess.value === '') {  // Prevent the user from entering an empty string
+       msgbtn.textContent = "Submit a number 1-100";
+       return;
+    }
 
-    // cache the guess into hisitory
-    let li = document.createElement("li");
-    li.textContent = guess.value;
-    // 6. Requirement - Use appendChild and/or prepend to add new elements to the DOM.
-    history.prepend(li);
+    // 8. Requirement - Modify the HTML or text content of at least one element in response to user interaction using innerHTML, innerText, or textContent.
+    overviewbtn.textContent = "This text has now been changed."
 
     // 3. Requirement Use the parent-child-sibling relationship to navigate between elements at least once 
     let theparentnode = submitbtn.parentNode;
@@ -70,12 +78,11 @@ function submitit(event) {
         msgbtn.textContent = "Too high";
     }
 
-//     let guessnum = Number(guess.value);
-//    // console.log('Number.isInteger(guess.value) ' + Number.isInteger(guess.value));
-//     if (!Number.isInteger(guessnum))  {
-//         console.log('got here');
-//         msgbtn.textContent = "Please enter an integer value."
-//     };
+    // cache the guess into hisitory
+    let li = document.createElement("li");
+    li.textContent = guess.value + ' - ' + msgbtn.textContent;
+    // 6. Requirement - Use appendChild and/or prepend to add new elements to the DOM.
+    history.prepend(li);
 
     guess.value = "";
 
