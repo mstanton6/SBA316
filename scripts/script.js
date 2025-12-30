@@ -9,6 +9,7 @@ const changebtn = document.getElementById('changesubmit');
 const changeinput = document.getElementById('changes');
 const history = document.getElementById('historyguess'); // ('guessForm');
 const overviewbtn = document.getElementById('overview');
+const li2btn = document.getElementById("li2");
 // const formbtn = document.getElementById('guessForm');
 
 // Get a random number
@@ -107,6 +108,12 @@ function submitit(event) {
     // 6. Requirement - Use appendChild and/or prepend to add new elements to the DOM.
     history.prepend(li);
 
+    // Clone the value in the li history list to li2
+    // 7. Requirement - Use the DocumentFragment interface or HTML templating with the cloneNode method to create templated content.
+    const node = history.querySelector('li');
+    const clone = node.cloneNode(true);
+    li2btn.appendChild(clone);
+
     guess.value = "";
 
     return;
@@ -121,9 +128,10 @@ function startnew() {
     // Clear the messages
     msgbtn.textContent = "";
     history.textContent = "";
+    li2.textContent = ""
     guess.value = "";
     changeinput.value = "";
-
+    overviewbtn.textContent = `A number guessing game is a simple challenge where a player tries to guess a secret number chosen by the computer or another player within a limited number of attempts, receiving "too high" or "too low" hints after each incorrect guess to narrow down the possibilities and find the answer efficiently.`;
 
     // Get a new random number number every time "Start New Game" is clicked.
     answer = Math.floor(Math.random() * 100) + 1;
