@@ -12,10 +12,11 @@
 
     <div class="center-container">        
         <form id="guessForm">
+            <img src="./images/slots.gif" alt="Hero Img" style="width:250px;height:200px;" />
             <h1>Guess a Number</h1>
             <div id="overview" style="color: black; background-color: white; font-weight: bold; width: 500px; text-align: center; margin: 0 auto;"> </div>
             <br /><br />
-            <label for="guess">Guess (between 1 and 100):</label>
+            <label for="guess" style="font-weight:bold; font-size:18px">Guess (between 1 and 100):</label>
             <!-- Requirement 13 - Include at least one form and/or input with HTML attribute validation. -->
             <input type="number" id="guess" name="guess" min="1" max="100">
             <br /><br />
@@ -30,9 +31,8 @@
             <br /><br />            
             <button type="button" id="exit">Exit Game</button>
             <br /><br />
-            <label for="history">History:</label>
-            <br /><br />
-            <div id="historyguess" style="color: white; background-color: blue; font-weight: bold; width: 140px; text-align: center; margin: 0 auto;"> </div>
+            <h3>History</h3>
+            <ul id="history" style="color: white; background-color: blue; width: 200px; text-align: center; margin: 0 auto;"></ul>
             <br /><br />
             <ul id="li2"></ul>
         </form>

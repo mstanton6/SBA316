@@ -10,6 +10,7 @@ const changeinput = document.getElementById('changes');
 const history = document.getElementById('historyguess'); // ('guessForm');
 const overviewbtn = document.getElementById('overview');
 const li2btn = document.getElementById("li2");
+const historylist = document.getElementById("history");
 // const formbtn = document.getElementById('guessForm');
 
 // Get a random number
@@ -61,7 +62,7 @@ function submitit(event) {
     *  This function 1. Prevent the user from entering an empty string 2. Modify the HTML or text content of at least one element and Use at least two Browser Object Model (BOM) properties or methods
     *  3. Use the parent-child-sibling relationship to navigate between elements at least once
     *  4. The color of the buttons will change randomly upon the submit button being clicked and Iterate over a collection of elements to accomplish some task.
-    *  5. The game logic 6. cache the guess into hisitory
+    *  5. The game logic 6. cache the guess into hisitory 7. Clone the value in the li history list to li2
     */
     event.preventDefault();
 
@@ -74,7 +75,7 @@ function submitit(event) {
 
     // 8. Requirement - Modify the HTML or text content of at least one element in response to user interaction using innerHTML, innerText, or textContent.
     // Requirement 12b: Use at least two Browser Object Model (BOM) properties or methods
-    overviewbtn.textContent = "This text has now been changed to show you window width and height: " + window.innerWidth + " X " + window.innerHeight;
+    overviewbtn.textContent = "This text has now been changed to show your window width and height: " + window.innerWidth + " X " + window.innerHeight;
 
     // 3. Requirement Use the parent-child-sibling relationship to navigate between elements at least once 
     let theparentnode = submitbtn.parentNode;
@@ -102,17 +103,16 @@ function submitit(event) {
         msgbtn.textContent = "Too high";
     }
 
-    // cache the guess into hisitory
     let li = document.createElement("li");
     li.textContent = guess.value + ' - ' + msgbtn.textContent;
     // 6. Requirement - Use appendChild and/or prepend to add new elements to the DOM.
-    history.prepend(li);
+    historylist.prepend(li);
 
-    // Clone the value in the li history list to li2
+    // Clone the value in the li historylist to li2
     // 7. Requirement - Use the DocumentFragment interface or HTML templating with the cloneNode method to create templated content.
-    const node = history.querySelector('li');
+    const node = historylist.querySelector('li');
     const clone = node.cloneNode(true);
-    li2btn.appendChild(clone);
+    li2btn.prepend(clone);
 
     guess.value = "";
 
@@ -127,15 +127,14 @@ function startnew() {
     */
     // Clear the messages
     msgbtn.textContent = "";
-    history.textContent = "";
     li2.textContent = ""
     guess.value = "";
     changeinput.value = "";
     overviewbtn.textContent = `A number guessing game is a simple challenge where a player tries to guess a secret number chosen by the computer or another player within a limited number of attempts, receiving "too high" or "too low" hints after each incorrect guess to narrow down the possibilities and find the answer efficiently.`;
+    historylist.innerHTML = ""; // clear the history
 
     // Get a new random number number every time "Start New Game" is clicked.
     answer = Math.floor(Math.random() * 100) + 1;
-    //console.log('answer ' + answer);
 
     // Creates a new button on the fly
     let container = document.getElementById('guessForm')

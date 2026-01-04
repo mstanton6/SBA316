@@ -35,3 +35,5 @@ To view this project locally:
 1. https://www.w3schools.com/
 
 2. https://www.google.com/
+
+3. https://giphy.com/
