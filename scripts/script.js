@@ -11,6 +11,7 @@ const history = document.getElementById('historyguess'); // ('guessForm');
 const overviewbtn = document.getElementById('overview');
 const li2btn = document.getElementById("li2");
 const historylist = document.getElementById("history");
+let numguesses = 0;
 // const formbtn = document.getElementById('guessForm');
 
 // Get a random number
@@ -68,7 +69,7 @@ function submitit(event) {
 
     // Requirement 14 - Include at least one form and/or input with DOM event-based validation.
     // (This can be the same form or input as the one above, but should include event-based validation in addition to the HTML attribute validation.)
-    if (guess.value === '') {  // Prevent the user from entering an empty string
+    if (guess.value === '' || Number(guess.value ) < 1 || Number(guess.value ) > 100) {  // Prevent the user from entering an empty string or number out of bounds
         msgbtn.textContent = "Submit a number 1-100";
         return;
     }
@@ -91,11 +92,13 @@ function submitit(event) {
         button.style.color = colorarr[newcolor];  // turn all the buttons color to a randowm color on submit
     }
 
+    numguesses = numguesses + 1;
+
     // This is the game logic
     if (isNaN(Number(guess.value))) {
         msgbtn.textContent = "That is not a number";
     } else if (Number(guess.value) === answer) {
-        msgbtn.textContent = "You guessed it!";
+        msgbtn.textContent = "You guessed it in " + numguesses + " guesses!";
     } else if (Number(guess.value) < answer) {
         msgbtn.textContent = "Too low";
     }
